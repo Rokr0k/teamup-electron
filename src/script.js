@@ -157,10 +157,6 @@ save.onclick = () => {
     if (teamsObj) {
         const keys = Object.keys(teamsObj);
         const content = [...teamsObj.map(row => keys.map(i => JSON.stringify(row[i], (_key, value) => value == undefined ? '' : value)).join(','))].join('\r\n');
-        const blob = new Blob([content], { type: 'text/csv' });
-        const anchor = document.createElement("a");
-        anchor.download = "teams.csv";
-        anchor.href = URL.createObjectURL(blob);
-        anchor.click();
+        window.ipc.send("save", content);
     }
 }

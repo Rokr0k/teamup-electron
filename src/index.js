@@ -1,4 +1,5 @@
-import { app, BrowserWindow, protocol } from 'electron';
+const { app, BrowserWindow, protocol, dialog, ipcMain } = require('electron');
+const fs = require('fs');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -12,16 +13,20 @@ let mainWindow;
 const createWindow = () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1280,
-    height: 720,
     title: "Team Up",
+    autoHideMenuBar: true,
+    webPreferences: {
+      preload: `${__dirname}/preload.js`,
+    }
   });
+
+  mainWindow.maximize();
 
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${__dirname}/index.html`);
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {
@@ -32,7 +37,15 @@ const createWindow = () => {
   });
 
   protocol.registerFileProtocol("teamup-dir", (req, callback) => {
-    callback({path: `${__dirname}${new URL(req.url).pathname}`});
+    callback({ path: `${__dirname}${new URL(req.url).pathname}` });
+  });
+
+  ipcMain.addListener('save', content => {
+    dialog.showSaveDialog(mainWindow, {filters: [{name: "CSV", extensions: ['csv']}]}).then(value => {
+      if(!value.canceled) {
+        fs.writeFileSync(value.filePath, content);
+      }
+    })
   })
 };
 
