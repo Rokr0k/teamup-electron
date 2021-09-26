@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
-    <title>Team Up</title>
 </head>
 <body>
     <div id="control">
@@ -19,12 +18,8 @@
         <label><input type="checkbox" id="animation"> 애니메이션 실행</label>
     </div>
     <div id="container"></div>
-    <video id="wish" preload="auto" hidden>
-        <source src="./wish.mp4" type="video/mp4">
-    </video>
-    <audio id="chang" preload="auto" hidden>
-        <source src="./chang.ogg" type="audio/ogg">
-    </audio>
+    <video id="wish" src="teamup-dir:///wish.mp4" preload="auto" hidden></video>
+    <audio id="chang" src="teamup-dir:///chang.ogg" preload="auto" hidden></audio>
     <div id="bgs" hidden></div>
     <div style="position: fixed; right: 0; bottom: 0; opacity: 50%; font-size: 50px; color: white;">Rokr0k &copy; 2021</div>
     <script src="./script.js"></script>
