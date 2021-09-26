@@ -14,6 +14,7 @@ const createWindow = () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     title: "Team Up",
+    icon: `${__dirname}/icon.png`,
     autoHideMenuBar: true,
     webPreferences: {
       preload: `${__dirname}/preload.js`,
