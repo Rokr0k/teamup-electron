@@ -14,7 +14,7 @@ const createWindow = () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     title: "Team Up",
-    icon: `${__dirname}/icon.png`,
+    icon: `${__dirname}/../assets/icon/png/icon.png`,
     autoHideMenuBar: true,
     webPreferences: {
       preload: `${__dirname}/preload.js`,
@@ -38,7 +38,7 @@ const createWindow = () => {
   });
 
   protocol.registerFileProtocol("teamup-dir", (req, callback) => {
-    callback({ path: `${__dirname}${new URL(req.url).pathname}` });
+    callback({ path: `${__dirname}/..${new URL(req.url).pathname}` });
   });
 
   ipcMain.addListener('save', content => {
