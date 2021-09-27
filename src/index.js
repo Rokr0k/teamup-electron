@@ -1,5 +1,5 @@
-const { app, BrowserWindow, protocol, dialog, ipcMain } = require('electron');
-const fs = require('fs');
+import { app, BrowserWindow, protocol, dialog, ipcMain } from 'electron';
+import { writeFileSync } from 'fs';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -45,7 +45,7 @@ const createWindow = () => {
     dialog.showSaveDialog(mainWindow, {filters: [{name: "CSV", extensions: ['csv']}]}).then(value => {
       if(!value.canceled) {
         console.log(content);
-        fs.writeFileSync(value.filePath, content);
+        writeFileSync(value.filePath, content);
       }
     })
   })
