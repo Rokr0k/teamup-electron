@@ -28,9 +28,6 @@
           "rpm"
         ]
       },
-      "packagerConfig": {
-        "icon": "assets/icon/win/icon.ico"
-      },
       "electronPackagerConfig": {
         "packageManager": "npm"
       },
