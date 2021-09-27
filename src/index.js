@@ -41,9 +41,10 @@ const createWindow = () => {
     callback({ path: `${__dirname}/..${new URL(req.url).pathname}` });
   });
 
-  ipcMain.addListener('save', content => {
+  ipcMain.on('save', (_, content) => {
     dialog.showSaveDialog(mainWindow, {filters: [{name: "CSV", extensions: ['csv']}]}).then(value => {
       if(!value.canceled) {
+        console.log(content);
         fs.writeFileSync(value.filePath, content);
       }
     })
