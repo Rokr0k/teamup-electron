@@ -157,6 +157,6 @@ save.onclick = () => {
     if (teamsObj) {
         const keys = Object.keys(teamsObj);
         const content = [...teamsObj.map(row => keys.map(i => JSON.stringify(row[i], (_key, value) => value == undefined ? '' : value)).join(','))].join('\r\n');
-        window.ipc.send("save", content);
+        this.ipcRenderer.send("save", content);
     }
 }

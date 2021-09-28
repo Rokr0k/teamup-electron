@@ -1,5 +1,5 @@
-import { ipcRenderer } from "electron";
+const {ipcRenderer} = require('electron');
 
-process.once('loaded', () => {
-    window.ipc = ipcRenderer;
+process.on('loaded', () => {
+    window.ipcRenderer = ipcRenderer;
 });
