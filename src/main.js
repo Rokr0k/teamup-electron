@@ -1,9 +1,9 @@
 const { app, BrowserWindow, dialog, ipcMain } = require('electron');
 const fs = require('fs');
 
-// if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
-//   app.quit();
-// }
+if (require('electron-squirrel-startup')) {
+  app.quit();
+}
 
 let mainWindow;
 
@@ -21,8 +21,6 @@ const createWindow = () => {
   mainWindow.maximize();
 
   mainWindow.loadURL(`file://${__dirname}/../public/html/index.html`);
-
-  mainWindow.webContents.openDevTools();
 
   mainWindow.on('closed', () => {
     mainWindow = null;
